@@ -1,0 +1,83 @@
+.sidebar {
+    position: fixed; 
+    left: 0;
+    top: 0;
+    width: 210px;
+    height: 100%;
+    z-index: 2; 
+    background-color: #3E3A36; 
+    color: #888682;
+    box-shadow: 2px 0px 5px rgba(0,0,0,0.1);
+  }
+.logo{
+    width: 210px;
+    height: 60px;
+    color: white;
+    background-color: #ED6C44;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.logo h3{
+    font-size: 32px;
+}
+.logo h3 span{
+    font-size: 36px;
+    font-weight: 800;
+}
+.watch-list{
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.menu{
+padding-left: 0;   
+list-style: none;
+display: flex;
+flex-direction: column;
+gap: 0px;
+}
+.menu li{
+    display: flex;
+    align-items: center;
+    height: 40px;
+    text-indent: 30px;
+}
+.menu li:hover{
+    background-color: #fff;
+}
+.menu li a {
+    text-decoration: none;  
+    color: inherit;         
+}
+.menu li:hover{
+    color: #ED6C44;
+}
+.parag{
+    padding-top: 10px;
+    padding-left: 10px;
+}
+.parag2{
+    padding-left: 10px;
+    padding-bottom: 20px;
+}
+.parag3{
+    padding-top: 30px;
+    padding-left: 10px;
+    padding-bottom: 20px;
+}
+.button{
+    background-color: #3E3A36;
+    border-style: none;
+    color: #fff;
+    cursor: pointer;
+}
+.button:hover{
+    background-color: #fff;
+    color: #111;
+}
+.statics-img img{
+    padding-top: 20px;
+    width: 210px;
+}

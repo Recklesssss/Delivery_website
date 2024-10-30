@@ -1,0 +1,70 @@
+/* Right Sidebar */
+.right-sidebar {
+    padding-top: 80px;
+    width: 300px; /* Adjust to the needed width */
+    height: 100vh;
+    position: fixed;
+    right: 0;
+    top: 0;
+    background-color: #f8f9fa; /* Light background */
+    padding: 20px;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1); /* Subtle shadow on the left */
+    position:fixed;
+    z-index: -1;
+    overflow-y: auto; /* Scroll if content overflows */
+    padding-top: 80px;
+}
+
+/* Search bar styling */
+.search-rightbar-container {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 20px;
+    padding: 5px 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.search-rightbar {
+    border: none;
+    outline: none;
+    padding: 5px;
+    width: 100%;
+    border-radius: 20px;
+}
+
+.search-icon-rightbar {
+    margin-right: 10px;
+}
+
+/* Users list */
+.users-list {
+    margin-top: 20px;
+}
+
+.users-list h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.users-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.users-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #f0f0f0;
+}
+
+.users-list li img {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
