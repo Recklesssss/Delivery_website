@@ -1,6 +1,7 @@
 import React from 'react'
 import "./left.css"
 import { FaSortDown } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 function Left() {
   return (
@@ -13,7 +14,9 @@ function Left() {
          <p>Overviews</p>
          </div>
       <ul class="menu">
-         <li><a href="#">Community</a></li>
+         <Link to="/addUser">
+            <li><a href="#">User</a></li>
+         </Link>
          <li><a href="#">Admin Dashboard</a></li>
          <li><a href="#">Delivery management</a></li>
          <li><a href="#">Statistics</a></li>

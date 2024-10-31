@@ -4,15 +4,36 @@ import Left from './left-sidebar/Left';
 import Right from './right-sidebar/Right';
 import Middle from './Main/Middle';
 import './App.css';
+import AddUser from './Users/AddUser';
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      <Header/>
-      <Left/>
-      <Right/>
-      <Middle/>
-
+      <Router>
+        <Routes>
+        <Route
+        path='/addUser'
+        element = {
+          <>
+            <AddUser/>
+          </>
+        }
+        />
+          <Route
+            path='/'
+            element={
+              <>
+                <Header/>
+                <Left/>
+                <Right/>
+                <Middle/>
+              </>
+            }
+          />
+        </Routes>
+      
+      </Router>
 
     </div>
   );
