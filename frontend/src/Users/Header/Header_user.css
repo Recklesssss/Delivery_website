@@ -1,0 +1,53 @@
+.header_user{
+    width: calc(100% - 208px);
+    height: 60px;
+    background-color: #EAEBEF;
+    position: absolute;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1360px;
+}
+.search__container {
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+}
+.search-icon {
+    position: absolute;
+    left: 15px; /* Adjust positioning for icon inside input */
+    font-size: 1.2rem;
+    color: gray;
+}
+.search-icon1{
+    border-right: 1px solid #111;
+    padding-right:10px ;
+}
+.Usersearch_bar {
+    position: absolute;
+    left: 10px;
+    width: 300px; /* Set a width */
+    padding: 10px 20px 10px 40px; /* Space for icon inside input */
+    border-style: none;
+    border-radius: 25px; /* Adjust for a more refined look */
+    outline: none;
+}
+.left__buttons {
+    position: absolute;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between icon and button */
+}
+.add__button {
+    padding: 8px 16px;
+    border-radius: 25px;
+    background-color: #A75DE9;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+.add__button:hover {
+    background-color: #0056b3;
+}
