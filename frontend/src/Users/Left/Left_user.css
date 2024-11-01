@@ -6,7 +6,7 @@
     flex-direction: column;
     align-items: center;
     padding-top: 20px;
-    position: fixed; /* Sidebar stays in place */
+    position: absolute; /* Sidebar stays in place */
 }
 
 .admin_profile {
@@ -55,4 +55,6 @@
 }
 .admin_icons{
     padding-right: 10px;
+    height: 30px;
+    width: 30px;
 }
