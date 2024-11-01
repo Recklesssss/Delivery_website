@@ -3,6 +3,7 @@ import "./Left_user.css"
 import { TfiDashboard } from "react-icons/tfi";
 import { FaInbox } from "react-icons/fa6";
 import { IoSettingsOutline } from "react-icons/io5";
+import { Link } from 'react-router-dom';
 
 function Left_user() {
   return (
@@ -13,7 +14,9 @@ function Left_user() {
         </div>
         <div className="admin__buttons">
             <ul>
-                <li><TfiDashboard className='admin_icons'/> Dashboard</li>
+                <Link to={"/"}>
+                  <li><TfiDashboard className='admin_icons'/> Dashboard</li>
+                </Link>
                 <li><FaInbox className='admin_icons'/>inbox</li>
                 <li><IoSettingsOutline className='admin_icons'/>setting</li>
             </ul>
