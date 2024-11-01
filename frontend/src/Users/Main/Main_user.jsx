@@ -32,11 +32,11 @@ function Main_user() {
                     <input type="text"/>
                 </div>
                 <div className="division3">
-                    <label>Fax</label>
+                    <label>Role</label>
                     <input type="text"/>
                 </div>
                 <div className="division4">
-                    <label>National id</label>
+                    <label>Password</label>
                     <input type="link"/>
                 </div>
             </div>
