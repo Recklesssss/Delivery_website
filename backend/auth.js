@@ -1,9 +1,11 @@
 const router = require("express").Router();
 import express, { Router } from "express";
+import cors from 'cors';
 import pg from "pg";
 
 const app = express();
-const port = 3000;
+app.use(cors());
+const port = 3005;
 
 const db = new pg.Client({
   user: "user-admin",
@@ -136,6 +138,37 @@ router.get("/user/:id", async (req, res) => {
 
 //**********************   this is for admin page  **************************//
 
-router
+router.post("/addUsers", async (req, res) => {
+  const { firstName, lastName, address, email, phone, password, role } = req.body;
+
+  try {
+
+    const roleResult = await db.query(
+      "SELECT role_id FROM roles WHERE role_name = $1",
+      [role]
+    );
+
+    if (roleResult.rows.length === 0) {
+      return res.status(400).json({ error: "Role not found" });
+    }
+    const roleId = roleResult.rows[0].role_id;
+
+    await db.query(
+      `
+      INSERT INTO users (username, password, email, address, phone, role_id)
+      VALUES ($1, $2, $3, $4, $5, $6)
+      `,
+      [firstName + " " + lastName, password, email, address, phone, roleId]
+    );
+
+    res.status(201).json({ message: "User added successfully" });
+  } catch (error) {
+    console.error("Error adding user:", error);
+    res.status(500).json({ error: "An error occurred" });
+  }
+});
 
 
+app.listen(port,(req,res) => {
+  console.log(`server connected on port: ${port}`)
+})
