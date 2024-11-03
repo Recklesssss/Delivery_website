@@ -1,14 +1,19 @@
-const router = require("express").Router();
-import express, { Router } from "express";
-import cors from 'cors';
-import pg from "pg";
+const express = require('express');
+const cors = require('cors');
+const {Pool} = require('pg');
 
 const app = express();
-app.use(cors());
-const port = 3005;
+const corsOptions = {
+  origin: 'http://localhost:3000', // Update with your front-end URL
+  methods: ['GET', 'POST'], // Add any other methods you use
+  allowedHeaders: ['Content-Type'],
+};
+app.use(cors(corsOptions));
+app.use(express.json());
+const port = 3065;
 
-const db = new pg.Client({
-  user: "user-admin",
+const db = new Pool({
+  user: "postgres",
   host: "localhost",
   database: "Delivery System",
   password: "biruk4you",
@@ -20,7 +25,7 @@ db.connect();
 
 //RESTAURAT NAME
 
-router.get("/getRestaurant_name",async(req,res) =>{
+app.get("/getRestaurant_name",async(req,res) =>{
     const getRestaurant_name = await db.query("select restaurant_name from restaurant");
      
     const restaurants = getRestaurant_name.rows.map((restaurant) =>
@@ -31,7 +36,7 @@ router.get("/getRestaurant_name",async(req,res) =>{
 
 //GET CATAGORIES
 
-router.get("/getCategories", async (req, res) => {
+app.get("/getCategories", async (req, res) => {
     try {
       const { restaurant_name } = req.body; 
 
@@ -41,7 +46,7 @@ router.get("/getCategories", async (req, res) => {
          INNER JOIN restaurant r ON c.restaurant_id = r.restaurant_id
          WHERE r.restaurant_name = $1`,
         [restaurant_name]
-      );
+      ); 
   
       const categories = getCategories.rows.map((category) => category.category_name);
       res.json(categories);
@@ -53,7 +58,7 @@ router.get("/getCategories", async (req, res) => {
 
   //GET MENU
   
-  router.get("/getMenu", async (req, res) => {
+  app.get("/getMenu", async (req, res) => {
     try {
       const { restaurant_name, category_name } = req.body; // Expecting restaurant_name and category_name in request body
   
@@ -76,7 +81,7 @@ router.get("/getCategories", async (req, res) => {
 
 ///ADDING ORDER
 
-  router.put("/addToOrder", async (req, res) => {
+  app.put("/addToOrder", async (req, res) => {
     try {
         
         const { user_id, food_id } = req.body;
@@ -101,21 +106,22 @@ router.get("/getCategories", async (req, res) => {
 
 ///SIGN UP USERS TO BE CONTINUED FOR THIS SECTION
 
-Router.post("/signup",async(req,res) => {
+app.post("/signup",async(req,res) => {
   try {
     const {username,email,password,address,phone} = req.body;
   const signInData = await db.query(`
     insert into users
      (username,email,password,address,phone,created_at) 
-     value ($1, $2,$3,$4,$5,NOW())`,
+     VALUES ($1, $2,$3,$4,$5,NOW())`,
      [username,email,password,address,phone])
+     res.status(201).json({ message: "User registered successfully" });
   } catch (error) {
     console.error("Error adding order:", error);
         res.status(500).json({ error: "Failed to add user" });
   }
 });
 
-router.get("/user/:id", async (req, res) => {
+app.get("/user/:id", async (req, res) => {
   const userId = req.body.password;
 
   try {
@@ -138,29 +144,23 @@ router.get("/user/:id", async (req, res) => {
 
 //**********************   this is for admin page  **************************//
 
-router.post("/addUsers", async (req, res) => {
-  const { firstName, lastName, address, email, phone, password, role } = req.body;
+app.post("/addUsers", async (req, res) => {
+  const { firstName, lastName, address, email, phone, password } = req.body;
 
+  if (!firstName || !lastName || !email || !password || !address || !phone) {
+    return res.status(400).json({ error: "All fields are required." });
+}
+  
   try {
-
-    const roleResult = await db.query(
-      "SELECT role_id FROM roles WHERE role_name = $1",
-      [role]
-    );
-
-    if (roleResult.rows.length === 0) {
-      return res.status(400).json({ error: "Role not found" });
-    }
-    const roleId = roleResult.rows[0].role_id;
 
     await db.query(
       `
-      INSERT INTO users (username, password, email, address, phone, role_id)
-      VALUES ($1, $2, $3, $4, $5, $6)
+      INSERT INTO users (username, password, email, address, phone)
+      VALUES ($1, $2, $3, $4, $5)
       `,
-      [firstName + " " + lastName, password, email, address, phone, roleId]
+      [firstName + " " + lastName, password, email, address, phone]
     );
-
+ 
     res.status(201).json({ message: "User added successfully" });
   } catch (error) {
     console.error("Error adding user:", error);
@@ -169,6 +169,6 @@ router.post("/addUsers", async (req, res) => {
 });
 
 
-app.listen(port,(req,res) => {
-  console.log(`server connected on port: ${port}`)
-})
+app.listen(port, () => {
+  console.log(`Server connected on port: ${port}`);
+});
