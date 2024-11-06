@@ -17,7 +17,9 @@ function Left() {
          <Link to="/addUser">
             <li><a href="#">User</a></li>
          </Link>
-         <li><a href="#">Admin Dashboard</a></li>
+         <Link to={"/addrestaurant"}>
+            <li><a href="#">Restaurant</a></li>
+         </Link>
          <li><a href="#">Delivery management</a></li>
          <li><a href="#">Statistics</a></li>
       </ul>
