@@ -5,7 +5,7 @@ const {Pool} = require('pg');
 const app = express();
 const corsOptions = {
   origin: 'http://localhost:3000', // Update with your front-end URL
-  methods: ['GET', 'POST'], // Add any other methods you use
+  methods: ['GET', 'POST' ,'PUT'], // Add any other methods you use
   allowedHeaders: ['Content-Type'],
 };
 app.use(cors(corsOptions));
@@ -171,4 +171,42 @@ app.post("/addUsers", async (req, res) => {
 
 app.listen(port, () => {
   console.log(`Server connected on port: ${port}`);
+});
+
+
+//********************       the restaurant page        *******************//
+
+app.post("/AddRestaurant", async (req, res) => {
+  const { restaurant, phone, address } = req.body;
+  try {
+    await db.query(
+      `INSERT INTO restaurant (restaurant_name, Phone, address, created_at)
+       VALUES ($1, $2, $3, NOW())`,
+      [restaurant, phone, address]
+    );
+    res.status(201).json({ message: "Restaurant added successfully!" });
+  } catch (error) {
+    console.error("Error adding restaurant:", error);
+    res.status(500).json({ error: "An error occurred while adding the restaurant." });
+  }
+});
+
+app.put("/UpdateRestaurant", async (req, res) => {
+  const { restaurant, updatedRestaurant, updatedPhone, updatedAddress } = req.body;
+  try {
+    const updateResult = await db.query(
+      `UPDATE restaurant
+       SET restaurant_name = $1, phone = $2, address = $3, created_at = NOW()
+       WHERE restaurant_name = $4`,
+      [updatedRestaurant, updatedPhone, updatedAddress, restaurant]
+    );
+ 
+    if (updateResult.rowCount === 0) {
+      return res.status(404).json({ error: "Restaurant not found." });
+    }
+    res.status(200).json({ message: "Restaurant updated successfully!" });
+  } catch (error) {
+    console.error("Error updating restaurant:", error);
+    res.status(500).json({ error: "An error occurred while updating the restaurant." });
+  }
 });
