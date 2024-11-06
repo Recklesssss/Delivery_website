@@ -5,6 +5,7 @@ import Right from './right-sidebar/Right';
 import Middle from './Main/Middle';
 import './App.css';
 import AddUser from './Users/AddUser';
+import AddRestaurant from './Restuarant management/AddRestaurant';
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 
 function App() {
@@ -12,6 +13,14 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
+        <Route
+        path='/addrestaurant'
+        element = {
+          <>
+            <AddRestaurant/>
+          </>
+        }
+        />
         <Route
         path='/addUser'
         element = {
