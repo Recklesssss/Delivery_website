@@ -1,0 +1,9 @@
+.main__order{
+    width: calc(100% - 208px);
+    height: calc(100vh - 60px);
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: 30px;
+    box-sizing: border-box;
+}

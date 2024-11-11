@@ -6,6 +6,7 @@ import Middle from './Main/Middle';
 import './App.css';
 import AddUser from './Users/AddUser';
 import AddRestaurant from './Restuarant management/AddRestaurant';
+import OrderDeliveryManagement from './OrderDeliveryManagement/OrderDeliveryManagement';
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 
 function App() {
@@ -13,6 +14,14 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
+        <Route
+        path='/addOrderDelivery'
+        element = {
+          <>
+            <OrderDeliveryManagement/>
+          </>
+        }
+        />
         <Route
         path='/addrestaurant'
         element = {

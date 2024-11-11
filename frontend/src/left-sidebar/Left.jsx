@@ -20,7 +20,9 @@ function Left() {
          <Link to={"/addrestaurant"}>
             <li><a href="#">Restaurant</a></li>
          </Link>
-         <li><a href="#">Delivery management</a></li>
+         <Link to={"/addOrderDelivery"}>
+            <li><a href="#">Delivery management</a></li>
+         </Link>
          <li><a href="#">Statistics</a></li>
       </ul>
    </div>

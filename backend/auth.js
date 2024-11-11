@@ -102,6 +102,26 @@ app.get("/getCategories", async (req, res) => {
         res.status(500).json({ error: "Failed to add order" });
     }
 }); 
+
+//giving orders to the components over all get responses
+app.get("/getOrderData", async (req, res) => {
+  try {
+    const { user_id } = req.query;
+    const getOrderData = await db.query(`
+      SELECT *
+      FROM orders 
+      WHERE user_id = $1
+      AND placed_at > NOW() - INTERVAL '60 minutes'
+    `, [user_id]);
+    const grandTotal = getOrderData.rows.reduce((acc, order) => acc + order.total_price, 0);
+    res.json({ orders: getOrderData.rows, grandTotal });
+  } catch (error) {
+    console.error("Error getting total price:", error);
+    res.status(500).json({ error: "Failed to get total price" });
+  }
+});
+
+
   //////************* this is for authentication V1  ***************** */////
 
 ///SIGN UP USERS TO BE CONTINUED FOR THIS SECTION
